@@ -3,6 +3,10 @@ dubbo-spring-boot-starter
 using dubbo with spring boot style 。this is based on dubbo 2.5.3 and spring boot 1.4.1.RELEASE
 document:[spring boot with dubbo](https://my.oschina.net/u/3039671/blog/848097)
 
+# 核心功能
+自定义 dubbo Filter,
+   并且避免了添加resources/META-INF/dubbo/com.alibaba.dubbo.rpc.Filter
+
 # how to use
 you can deploy dubbo properties in spring boot configuration file —— application.properties/ym
 e.g

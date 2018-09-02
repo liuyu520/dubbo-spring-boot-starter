@@ -41,11 +41,26 @@ public class FilterProviderApplication {
 
     static class ProviderFilter extends AbstractDubboProviderFilterSupport {
         public Result invoke(Invoker<?> invoker, Invocation invocation) {
-            System.out.println("ProviderFilter");
+            System.out.println("ProviderFilter....");
             return invoker.invoke(invocation);
         }
     }
 
+    /***
+     * 自定义 dubbo Filter,<br />
+     * 并且避免了添加META-INF/dubbo/com.alibaba.dubbo.rpc.Filter
+     * @return
+     */
+    @Bean(name="newProviderFilter")
+    AbstractDubboProviderFilterSupport newProviderFilter(){
+        return new AbstractDubboProviderFilterSupport(){
+
+            public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
+                System.out.println("newProviderFilter added by 黄威....");
+                return invoker.invoke(invocation);
+            }
+        };
+    }
 
     @Bean
     CustomFilter customFilter() {
@@ -55,7 +70,7 @@ public class FilterProviderApplication {
     @Activate(group = Constants.PROVIDER)
     static class CustomFilter extends AbstractDubboFilterSupport {
         public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
-            System.out.println("ProviderFilter2");
+            System.out.println("ProviderFilter2....");
             return invoker.invoke(invocation);
         }
 
